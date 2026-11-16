@@ -9,7 +9,7 @@ const {R,S,SITE,M,URLS,svcPage}=ctx.X;
 const routes=[...Object.keys(R).map(k=>[k,k?URLS[k]||'Company Profile':'Home']),...S.map(x=>['services/'+x.s,x.t]),['gallery','Photo Gallery']];
 const fix=h=>h.replace(/href="#\/subcontracting-form"/g,'href="/subcontracting/#subcontracting-form"').replace(/href="#\/([^"#]*)"/g,(m,p)=>`href="/${p?p+'/':''}"`);
 const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-const org={"@context":"https://schema.org","@type":"Organization","name":SITE.name,"legalName":SITE.name,"url":URL_+"/","email":SITE.email,"address":{"@type":"PostalAddress","addressLocality":"Cape Town","addressRegion":"Western Cape","addressCountry":"ZA"},"areaServed":{"@type":"City","name":"Cape Town","containedInPlace":{"@type":"AdministrativeArea","name":"Western Cape"}}};
+const org={"@context":"https://schema.org","@type":"Organization","name":SITE.name,"legalName":SITE.name,"url":URL_+"/","email":SITE.email,"telephone":["+27 60 111 0724","+27 61 687 8497"],"address":{"@type":"PostalAddress","addressLocality":"Cape Town","addressRegion":"Western Cape","addressCountry":"ZA"},"areaServed":{"@type":"City","name":"Cape Town","containedInPlace":{"@type":"AdministrativeArea","name":"Western Cape"}}};
 const outDir=path.resolve('dist'),workspace=path.resolve('.');
 if(!outDir.startsWith(workspace+path.sep))throw Error('Build output must stay inside the workspace');
 if(fs.existsSync(outDir))for(const entry of fs.readdirSync(outDir,{withFileTypes:true}))fs.rmSync(path.join(outDir,entry.name),{recursive:true,force:true,maxRetries:5,retryDelay:100});
