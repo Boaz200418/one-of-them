@@ -28,6 +28,7 @@ const w=(f,c)=>{fs.mkdirSync(f.replace(/[^/]*$/,'')||'.',{recursive:true});fs.wr
 const urls=[];
 const images=fs.readdirSync('pictures',{withFileTypes:true}).filter(e=>e.isFile()).map(e=>{const ext=path.extname(e.name).toLowerCase();const stem=path.basename(e.name,ext).normalize('NFKD').replace(/[^\w -]/g,'').trim().replace(/[\s_]+/g,'-').replace(/-+/g,'-').toLowerCase();return {source:e.name,file:stem+ext}});
 fs.mkdirSync('dist/img',{recursive:true});for(const im of images)fs.copyFileSync(path.join('src/img',im.file),path.join('dist/img',im.file));
+fs.mkdirSync('dist/docs',{recursive:true});fs.copyFileSync('src/docs/one-of-them-group-company-profile.pdf','dist/docs/one-of-them-group-company-profile.pdf');
 const galleryItems=[
  ['branch removal.jpg','Branch removal','Tree Felling and Site Clearance','Careful removal of cut branches from a property.','/services/garden-tree-care/'],
  ['Commercial premises cleaning.jpg','Commercial premises cleaning','Cleaning','Cleaning equipment prepared for commercial premises cleaning.','/services/cleaning-services/'],
