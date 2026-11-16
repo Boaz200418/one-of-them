@@ -1,0 +1,32 @@
+{
+  "browser": "Chrome/157.0.8103.51",
+  "routes": 18,
+  "checked": 72,
+  "failures": [],
+  "byWidth": [
+    {
+      "width": 320,
+      "pages": 18,
+      "overflowPages": [],
+      "minimumButtonHeight": 52.390625
+    },
+    {
+      "width": 360,
+      "pages": 18,
+      "overflowPages": [],
+      "minimumButtonHeight": 52.390625
+    },
+    {
+      "width": 390,
+      "pages": 18,
+      "overflowPages": [],
+      "minimumButtonHeight": 52.390625
+    },
+    {
+      "width": 400,
+      "pages": 18,
+      "overflowPages": [],
+      "minimumButtonHeight": 52.390625
+    }
+  ]
+}

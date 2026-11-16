@@ -1,0 +1,18 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.9.0
+2 info using node@v24.14.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Shadow\desktop\one-of-them\.npmrc
+5 silly config load:file:C:\Users\Shadow\.npmrc
+6 silly config load:file:C:\Users\Shadow\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm exec lighthouse http://127.0.0.1:4179/ --output=json --output-path=tmp/lighthouse-desktop-final.json --preset=desktop --chrome-flags=--headless --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-features=VizDisplayCompositor,UseSkiaRenderer --quiet
+8 verbose argv "exec" "--yes" "--package" "lighthouse" "--" "lighthouse" "http://127.0.0.1:4179/" "--output=json" "--output-path=tmp/lighthouse-desktop-final.json" "--preset=desktop" "--chrome-flags=--headless --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-features=VizDisplayCompositor,UseSkiaRenderer" "--quiet"
+9 verbose logfile logs-max:10 dir:C:\Users\Shadow\desktop\one-of-them\tmp\npm-cache\_logs\2026-11-16T19_37_45_911Z-
+10 verbose logfile C:\Users\Shadow\desktop\one-of-them\tmp\npm-cache\_logs\2026-11-16T19_37_45_911Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 http fetch GET https://registry.npmjs.org/lighthouse attempt 1 failed with EACCES
+14 http fetch GET https://registry.npmjs.org/lighthouse attempt 2 failed with EACCES
+15 http fetch GET https://registry.npmjs.org/lighthouse attempt 3 failed with EACCES
+16 http fetch GET 200 https://registry.npmjs.org/lighthouse 70108ms (cache stale)
+17 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
