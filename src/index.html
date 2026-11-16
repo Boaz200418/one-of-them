@@ -70,7 +70,7 @@ const ul=a=>"<ul class='list'>"+a.map(x=>`<li>${x}</li>`).join("")+"</ul>";
 const faq=a=>a.map(x=>`<details><summary>${x[0]}</summary><p>${x[1]}</p></details>`).join("");
 const bc=a=>`<div class="bc"><a href="#/">Home</a> / ${a}</div>`;
 const ph=(t)=>{const k=t.split(" (")[0],u=(SITE.images||{})[k];return u?'<img class="photo" src="'+u+'" alt="'+t+'" loading="lazy" width="1280" height="800">':''};
-const area=`<p>Our initial service focus is ${SITE.areas.join(", ")} and surrounding areas of Cape Town. Other locations can be considered depending on scope and available resources.</p>`;
+const area=`<p>Based in Cape Town, Western Cape, our initial service focus is ${SITE.areas.join(", ")} and nearby areas. Other Western Cape locations can be considered depending on scope and available resources.</p>`;
 const cta=(h,p)=>`<section class="cta"><div class="w"><h2>${h}</h2><p>${p}</p><div class="row" style="justify-content:center"><a class="btn" href="#/contact">Request a Quote</a><a class="btn o" href="#/contact">Contact Our Team</a></div></div></section>`;
 const field=(n,l,t="text",req,extra="")=>`<div class="f"><label for="${n}">${l}${req?" *":""}</label><input id="${n}" name="${n}" type="${t}" ${req?"required":""} ${extra}><span class="err" id="e-${n}"></span></div>`;
 const sel=(n,l,o,req)=>`<div class="f"><label for="${n}">${l}${req?" *":""}</label><select id="${n}" name="${n}" ${req?"required":""}><option value="">Select an option</option>${o.map(x=>`<option>${x}</option>`).join("")}</select><span class="err" id="e-${n}"></span></div>`;

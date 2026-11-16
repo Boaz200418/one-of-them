@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>About Us | ONE OF THEM GROUP</title>
-<meta name="description" content="About ONE OF THEM GROUP, a South African company offering labour support, cleaning, site clearance and maintenance in Cape Town.">
+<title>About Us Cape Town | ONE OF THEM GROUP</title>
+<meta name="description" content="About ONE OF THEM GROUP, a South African company offering labour support, cleaning, site clearance and maintenance in Cape Town. Based in Cape Town,…">
+<meta name="geo.region" content="ZA-WC"><meta name="geo.placename" content="Cape Town, Western Cape, South Africa">
 <link rel="canonical" href="https://www.example.co.za/about/">
-<meta property="og:type" content="website"><meta property="og:title" content="About Us | ONE OF THEM GROUP"><meta property="og:description" content="About ONE OF THEM GROUP, a South African company offering labour support, cleaning, site clearance and maintenance in Cape Town."><meta property="og:url" content="https://www.example.co.za/about/"><meta property="og:locale" content="en_ZA">
+<meta property="og:type" content="website"><meta property="og:title" content="About Us Cape Town | ONE OF THEM GROUP"><meta property="og:description" content="About ONE OF THEM GROUP, a South African company offering labour support, cleaning, site clearance and maintenance in Cape Town. Based in Cape Town,…"><meta property="og:url" content="https://www.example.co.za/about/"><meta property="og:locale" content="en_ZA">
 <meta name="theme-color" content="#11283d">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_ZA">
@@ -27,7 +28,7 @@ footer{background:#0b1d2d;color:#c6d2d9;padding:54px 0 26px;font-size:.93rem}foo
 @media(max-width:560px){.w{padding:0 20px}section{padding:60px 0}.hero{padding:74px 0;background-position:58% center}.hero h1{font-size:clamp(2.35rem,12vw,3.4rem)}.gallery-grid{grid-template-columns:1fr}.logo{font-size:.9rem}.logo small{font-size:.5rem}.logo svg{width:34px;height:34px}.row .btn{width:100%}footer .g{grid-template-columns:1fr;gap:20px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ONE OF THEM GROUP (Pty) Ltd","legalName":"ONE OF THEM GROUP (Pty) Ltd","url":"https://www.example.co.za/","email":"boaz@oneofthem.co.za","areaServed":"Cape Town, Western Cape, South Africa"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.co.za/"},{"@type":"ListItem","position":2,"name":"About Us","item":"https://www.example.co.za/about/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ONE OF THEM GROUP (Pty) Ltd","legalName":"ONE OF THEM GROUP (Pty) Ltd","url":"https://www.example.co.za/","email":"boaz@oneofthem.co.za","address":{"@type":"PostalAddress","addressLocality":"Cape Town","addressRegion":"Western Cape","addressCountry":"ZA"},"areaServed":{"@type":"City","name":"Cape Town","containedInPlace":{"@type":"AdministrativeArea","name":"Western Cape"}}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.co.za/"},{"@type":"ListItem","position":2,"name":"About Us","item":"https://www.example.co.za/about/"}]}</script>
 </head>
 <body>
 <div class="bar">Supporting contractors, businesses and property owners across Cape Town. <a href="/subcontracting/">Discuss a Project</a></div>
@@ -72,7 +73,7 @@ const ul=a=>"<ul class='list'>"+a.map(x=>`<li>${x}</li>`).join("")+"</ul>";
 const faq=a=>a.map(x=>`<details><summary>${x[0]}</summary><p>${x[1]}</p></details>`).join("");
 const bc=a=>`<div class="bc"><a href="/">Home</a> / ${a}</div>`;
 const ph=(t)=>{const k=t.split(" (")[0],u=(SITE.images||{})[k];return u?'<img class="photo" src="'+u+'" alt="'+t+'" loading="lazy" width="1280" height="800">':''};
-const area=`<p>Our initial service focus is ${SITE.areas.join(", ")} and surrounding areas of Cape Town. Other locations can be considered depending on scope and available resources.</p>`;
+const area=`<p>Based in Cape Town, Western Cape, our initial service focus is ${SITE.areas.join(", ")} and nearby areas. Other Western Cape locations can be considered depending on scope and available resources.</p>`;
 const cta=(h,p)=>`<section class="cta"><div class="w"><h2>${h}</h2><p>${p}</p><div class="row" style="justify-content:center"><a class="btn" href="/contact/">Request a Quote</a><a class="btn o" href="/contact/">Contact Our Team</a></div></div></section>`;
 const field=(n,l,t="text",req,extra="")=>`<div class="f"><label for="${n}">${l}${req?" *":""}</label><input id="${n}" name="${n}" type="${t}" ${req?"required":""} ${extra}><span class="err" id="e-${n}"></span></div>`;
 const sel=(n,l,o,req)=>`<div class="f"><label for="${n}">${l}${req?" *":""}</label><select id="${n}" name="${n}" ${req?"required":""}><option value="">Select an option</option>${o.map(x=>`<option>${x}</option>`).join("")}</select><span class="err" id="e-${n}"></span></div>`;
