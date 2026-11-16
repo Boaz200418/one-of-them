@@ -1,5 +1,5 @@
 import fs from 'fs';import vm from 'vm';import path from 'path';
-const URL_=(process.env.SITE_URL||'https://www.example.co.za').replace(/\/$/,'');
+const URL_=(process.env.SITE_URL||'https://oneofthem-group.com').replace(/\/$/,'');
 const src=fs.readFileSync('src/index.html','utf8');
 const js=src.match(/<script>([\s\S]*?)<\/script>\s*<\/body>/)[1];
 const d=()=>new Proxy(function(){},{get:(t,k)=>k===Symbol.toPrimitive?()=>'':k==='classList'?{add(){},remove(){},toggle(){}}:d(),apply:()=>d(),set:()=>true});
