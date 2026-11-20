@@ -1,6 +1,12 @@
 [build]
   command = "node build.mjs"
   publish = "dist"
+[build.environment]
+  SITE_URL = "https://oneofthem-group.com"
+[build.processing.html]
+  pretty_urls = true
+[functions]
+  directory = "netlify/functions"
 [[headers]]
   for = "/*"
   [headers.values]

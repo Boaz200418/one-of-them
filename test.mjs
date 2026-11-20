@@ -7,7 +7,14 @@ const htmlFiles=[];
 (function walk(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);entry.isDirectory()?walk(file):file.endsWith('.html')&&htmlFiles.push(file)}})('dist');
 
 const expectedHost='https://oneofthem-group.com';
+const netlifyConfig=fs.readFileSync('netlify.toml','utf8');
+ok(netlifyConfig.includes('command = "node build.mjs"'),'Netlify build command is configured');
+ok(netlifyConfig.includes('publish = "dist"'),'Netlify publish directory is configured');
+ok(netlifyConfig.includes('SITE_URL = "https://oneofthem-group.com"'),'Netlify production site URL is configured');
+ok(netlifyConfig.includes('pretty_urls = true'),'Netlify serves canonical clean page URLs');
+ok(netlifyConfig.includes('directory = "netlify/functions"'),'Netlify functions directory is configured');
 const publishedPages=htmlFiles.filter(file=>!file.endsWith(`${path.sep}404.html`));
+ok(publishedPages.length===18,'the build should generate exactly 18 public pages');
 const titles=new Set(),descriptions=new Set();
 for(const file of htmlFiles){
   const raw=fs.readFileSync(file,'utf8');
@@ -56,10 +63,15 @@ for(const url of sitemapUrls){const pathname=new URL(url).pathname;const target=
 const robots=fs.readFileSync('dist/robots.txt','utf8');
 ok(/^User-agent: \*\s+Allow: \/\s+Sitemap: https:\/\/oneofthem-group\.com\/sitemap\.xml\s*$/m.test(robots),'robots.txt allows public pages and points to the canonical sitemap');
 ok(fs.existsSync('dist/img/one-of-them-group-social-card.png'),'social image is copied into the build');
+for(const image of fs.readdirSync('src/img'))ok(fs.existsSync(path.join('dist/img',image)),`image asset is copied into the build: ${image}`);
 ok(fs.existsSync('dist/favicon.svg'),'branded favicon is copied into the build');
 ok(fs.existsSync('dist/docs/one-of-them-group-company-profile.pdf'),'company profile download exists');
+ok(fs.readFileSync('src/docs/one-of-them-group-company-profile.pdf').equals(fs.readFileSync('dist/docs/one-of-them-group-company-profile.pdf')),'corrected company profile is copied unchanged into dist');
 const docs=fs.readFileSync('dist/documents/index.html','utf8');
 ok(docs.includes('href="/docs/one-of-them-group-company-profile.pdf" download'),'document library has a working profile download');
+ok(fs.readFileSync('dist/company-profile/index.html','utf8').includes('href="/docs/one-of-them-group-company-profile.pdf" download'),'company profile route links directly to its download');
+ok(home.includes('formEndpoint:"/api/enquiry"'),'generated forms target the Netlify enquiry endpoint');
+ok(!htmlFiles.map(file=>fs.readFileSync(file,'utf8')).join('').includes('RESEND_API_KEY'),'Resend credentials are not exposed in generated pages');
 const group=fs.readFileSync('dist/group/index.html','utf8');
 for(const type of ['Organization','WebSite','WebPage','BreadcrumbList'])ok(group.includes(`"@type":"${type}"`),`group page has ${type} structured data`);
 for(const slug of ['labour-supply-site-support','garden-tree-care'])ok(fs.readFileSync(`dist/services/${slug}/index.html`,'utf8').includes('"@type":"Service"'),`${slug} has Service structured data`);
@@ -67,12 +79,18 @@ for(const slug of ['cleaning-services','welding-fabrication','renovations-mainte
 const painting=fs.readFileSync('dist/services/painting/index.html','utf8');
 ok(painting.includes('COMING SOON')&&painting.includes('not currently available for booking'),'painting is clearly marked coming soon');
 
-const fn=(await import('./netlify/functions/enquiry.mjs')).default;
+const fnModule=await import('./netlify/functions/enquiry.mjs');
+const fn=fnModule.default;
+ok(fnModule.config?.path==='/api/enquiry','Netlify enquiry function is mounted at /api/enquiry');
+ok((await fn(new Request('http://localhost/api/enquiry'))).status===405,'enquiry endpoint rejects non-POST methods');
+ok((await fn(new Request('http://localhost/api/enquiry',{method:'POST',body:'{'}))).status===400,'enquiry endpoint rejects malformed JSON');
 const post=body=>fn(new Request('http://localhost/api/enquiry',{method:'POST',body:JSON.stringify(body)}));
 const good={type:'Quote request',fields:{name:'A',method:'Email',email:'a@b.co',service:'S',loc:'L',desc:'D',priv:'on'}};
+ok((await post({...good,type:'Unknown request'})).status===400,'enquiry endpoint rejects unknown form types');
 ok((await post({...good,fields:{...good.fields,website:'spam'}})).status===400,'honeypot');
 ok((await post({...good,fields:{...good.fields,desc:''}})).status===422,'missing field');
 ok((await post({...good,fields:{...good.fields,priv:''}})).status===422,'consent');
+ok((await post({...good,fields:{...good.fields,email:'not-an-email'}})).status===422,'invalid email');
 delete process.env.RESEND_API_KEY;ok((await post(good)).status===503,'unconfigured service must return 503');
 Object.assign(process.env,{RESEND_API_KEY:'k',MAIL_TO:'t@x.co',MAIL_FROM:'f@x.co'});
 globalThis.fetch=async()=>({ok:true});ok((await post(good)).status===200,'success path (mocked provider)');
